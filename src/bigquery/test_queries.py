@@ -1,6 +1,5 @@
 from google.cloud import bigquery
 from collections import defaultdict
-from matplotlib import pyplot as plt
 import numpy as np
 
 '''
@@ -59,6 +58,3 @@ def get_log_probs(names_list, timeout_seconds=30):
 if __name__ == "__main__":
     test_names = ["George", "Ronald", "Lyndon", "William", "John"]
     years, logps = get_log_probs(test_names)
-    plt.plot(years, np.exp(logps))
-    plt.title(", ".join(test_names))
-    plt.show()
