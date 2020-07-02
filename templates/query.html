@@ -34,5 +34,12 @@
     <div id="container">
       <div id="name_chart" style="width: 900px; height: 500px"></div>
     </div>
+    <div id="name_entry" style="padding-left: 100px; padding-top: 40px">
+      <form action="{{ url_for('query') }}" method="post">
+        <textarea name="name_text" rows="15" cols="50" placeholder="Enter names separated by newlines.">{{textarea_content}}</textarea>
+
+        <input type="submit">
+      </form>
+    </div>
   </body>
 </html>

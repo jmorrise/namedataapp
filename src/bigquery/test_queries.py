@@ -43,6 +43,7 @@ def get_log_probs(names_list, timeout_seconds=30):
     job_config = bigquery.QueryJobConfig(query_parameters = [
         bigquery.ArrayQueryParameter('names', 'STRING', names_list)
     ])
+    job_config.use_query_cache = True
     query_job = bigquery_client.query(query, job_config=job_config)
     results = query_job.result(timeout=timeout_seconds)
     d = defaultdict(float)

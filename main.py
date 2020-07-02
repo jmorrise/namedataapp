@@ -5,17 +5,19 @@ from src.bigquery import test_queries
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
-@app.route('/query')
+@app.route('/query', methods=['GET', 'POST'])
 def query():
-    default_names = ["George", "Ronald", "Lyndon", "William", "John"]
-    names = request.args.getlist("name") or default_names
+    names = ["George", "Ronald", "Lyndon", "William", "John"]
+    if request.method == 'POST':
+        names = [n.strip() for n in request.form['name_text'].split('\n')]
     names = [n.capitalize() for n in names]
     years, logps = test_queries.get_log_probs(names)
     probs = np.exp(logps)
     query_data = list(zip([str(y) for y in years], probs/np.sum(probs)))
     title = ", ".join(names)
+    textarea_content = '\n'.join(names)
     return render_template(
-        'query.html', names=names, title=title,query_data=query_data)
+        'query.html', textarea_content=textarea_content, title=title,query_data=query_data)
 
 @app.errorhandler(500)
 def server_error(e):
