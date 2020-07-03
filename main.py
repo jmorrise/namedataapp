@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/query', methods=['GET', 'POST'])
 def query():
-    names = ["George", "Ronald", "Lyndon", "William", "John"]
+    names = ["Rachel", "Monica", "Phoebe", "Joseph", "Chandler", "Ross"]
     if request.method == 'POST':
         names = [n.strip() for n in request.form['name_text'].split('\n')]
     names = [n.capitalize() for n in names]
